@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 
 // Route files
 const hospitals = require('./routes/hospitals');
+const appointments = require('./routes/appointments');
 const auth = require('./routes/auth');
 
 
@@ -22,8 +23,10 @@ app.use(express.json());
 // Cookie parser
 app.use(cookieParser());
 
+//Mount routers
 app.use('/api/v1/hospitals', hospitals);
 app.use('/api/v1/auth',auth);
+app.use('/api/v1/appointments',appointments); 
 
 const PORT = process.env.PORT || 5000
 
