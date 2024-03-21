@@ -3,3 +3,4 @@ npm i -D nodemon
 npm i mongoose
 npm i cookie-parser
 npm i jsonwebtoken bcryptjs
+npm install mysql
