@@ -21,24 +21,26 @@ function Login(){
 
     useEffect(()=>{
         if(isError){
-        toast.error(message)
+            toast.error(message)
         }
+
         //redirect when logged in
         if(isSuccess || user){
-        navigate('/')
+            navigate('/')
         }
         dispatch(reset())
     },[isError, isSuccess, user, message, navigate, dispatch])
 
     const onChange = (e) =>{
         setFormData((prevState)=>({
-        ...prevState,
-        [e.target.name]: e.target.value
-    }));
+            ...prevState,
+            [e.target.name]: e.target.value
+        }));
     }
 
     const onSubmit =(e) => {
         e.preventDefault()
+        
         const userData={
             email,
             password

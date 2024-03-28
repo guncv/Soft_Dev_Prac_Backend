@@ -1,6 +1,14 @@
+#Back end
 npm i express dotenv
 npm i -D nodemon
 npm i mongoose
 npm i cookie-parser
 npm i jsonwebtoken bcryptjs
 npm install mysql
+npm install cors --save
+npm run dev (run)
+
+#Front end
+npx create-react-app vacqfrontend --template redux (create)
+npm install react-router-dom react-toastify axios react-icons 
+npm start (run)

@@ -15,7 +15,9 @@ dotenv.config({path: './config/config.env'});
 // Connect to database
 connectDB();
 
+const cors = require('cors');
 const app = express();
+app.use(cors());
 
 // Body parser
 app.use(express.json());

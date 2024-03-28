@@ -6,7 +6,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {register, reset} from '../features/auth/authSlice'
 
 function Register(){
-    const [formData,setFormData]=useState({
+    const [formData,setFormData] = useState({
         name:'',
         email: '',
         password: '',
@@ -16,9 +16,9 @@ function Register(){
 
     const {name,email,password,password2,role}=formData;
     const dispatch = useDispatch()
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
-    const {user,isLoading, isError, isSuccess,message}=useSelector((state)=>{
+    const {user,isLoading, isError, isSuccess,message} = useSelector((state)=>{
         return state.auth
     })
 
@@ -35,8 +35,8 @@ function Register(){
 
     const onChange = (e) =>{
         setFormData((prevState)=>({
-        ...prevState,
-        [e.target.name]: e.target.value
+            ...prevState,
+            [e.target.name]: e.target.value
         }));
     }
 
@@ -80,12 +80,12 @@ function Register(){
                     </div>
 
                     <div className="form-group">
-                        <input type="password" className='formcontrol' id='password' name='password' value={password}
+                        <input type="password" className='form-control' id='password' name='password' value={password}
                         onChange={onChange} placeholder='Enter Your password' required/>
                     </div>
 
                     <div className="form-group">
-                        <input type="password" className='formcontrol' id='password2' name='password2' value={password2}
+                        <input type="password" className='form-control' id='password2' name='password2' value={password2}
                         onChange={onChange} placeholder='Confirm Your password' required/>
                     </div>
 

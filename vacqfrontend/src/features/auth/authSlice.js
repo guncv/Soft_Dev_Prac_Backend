@@ -17,7 +17,6 @@ const initialState={
 }
 
 //Register new user
-
 export const register =
     createAsyncThunk('auth/register',async(user,thunkAPI)=>{
         console.log(user);
