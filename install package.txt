@@ -12,6 +12,8 @@ npm i express-xss-sanitizer (Cross-site scripting security)
 npm i express-rate-limit (Rate Limiting)
 npm i hpp (Prevent http param pollution)
 npm i cors (Cross-Origin Resource Sharing)
+npm install -save swagger-jsdoc@6.0.0
+npm i --save swagger-ui-express
 npm run dev (run)
 
 #Front end

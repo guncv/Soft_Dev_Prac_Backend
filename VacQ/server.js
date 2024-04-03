@@ -7,7 +7,9 @@ const helmet = require('helmet');
 const {xss} = require('express-xss-sanitizer');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
-const cors = require('cors');
+const cor = require('cors');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
 
 // Route files
 const hospitals = require('./routes/hospitals');
@@ -43,7 +45,7 @@ app.use(xss());
 //Rate Limiting
 const limiter = rateLimit({
     windowMs: 10*60*1000, //10mins
-    max: 5
+    max: 100
 })
 app.use(limiter);
 
@@ -51,7 +53,7 @@ app.use(limiter);
 app.use(hpp());
 
 //Enable CORS
-app.use(cors());
+app.use(cor());
 
 //Mount routers
 app.use('/api/v1/hospitals', hospitals);
@@ -69,3 +71,24 @@ process.on('unhandledRejection', (err, promise) => {
     // Close server & exit process
     server.close(() => process.exit(1))
 })
+
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+                title: 'Library API',
+                version: '1.0.0',
+            description: "A simple Express VacQ API"
+        },
+        servers: [
+            {
+                url: 'http://localhost:5000/api/v1'
+            }
+        ],
+    },
+    apis: ['./routes/*js',]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs));
