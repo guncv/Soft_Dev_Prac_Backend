@@ -14,6 +14,10 @@ npm i hpp (Prevent http param pollution)
 npm i cors (Cross-Origin Resource Sharing)
 npm install -save swagger-jsdoc@6.0.0
 npm i --save swagger-ui-express
+npm install -g newman (postman newman testing)
+newman run VacQ.postman_collection.json(file name from export) (run postman newman testing)
+npm install -g newman-reporter-htmlextra (newman reporter HTML Extra)
+newman run VacQ.postman_collection.json(file name from export) -r htmlextra (run newman reporter HTML extra)
 npm run dev (run)
 
 #Front end

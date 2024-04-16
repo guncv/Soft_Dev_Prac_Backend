@@ -42,7 +42,7 @@ exports.getHospitals=async (req,res,next)=>{
 
     //Pagination
     const page = parseInt(req.query.page,10) || 1;
-    const limit = parseInt(req.query.limit,10) || 25
+    const limit = parseInt(req.query.limit,10) || 1000
     const startIndex = (page-1)*limit;
     const endIndex = page*limit;
 
@@ -79,18 +79,19 @@ exports.getHospitals=async (req,res,next)=>{
 //@desc     Get single hospital
 //@route    GET /api/v1/hospitals/:id
 //@access   Public 
-exports.getHospital=async (req,res,next)=>{
+exports.getHospital = async (req, res, next) => {
     try {
         const hospital = await Hospital.findById(req.params.id);
-
         if (!hospital) {
-            return res.status(400).json({success:false});
+            return res.status(400).json({ success: false });
         }
+        res.status(200).json({ success: true, data: hospital })
+
     } catch (err) {
-        res.status(400).json({success:false});
+        res.status(400).json({ success: false });
     }
-    // res.status(200).json({success:true, msg:`Get hospital ${req.params.id}`});
 };
+
 
 //@desc     Create new hospital
 //@route    POST /api/v1/hospitals
@@ -111,7 +112,7 @@ exports.createHospital= async (req,res,next)=>{
 //@access   Private
 exports.updateHospital=async (req,res,next)=>{
     try {
-        const hospital = await Hospital.findByIdAndUpdate(req,params.idm, req.body, {
+        const hospital = await Hospital.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
         });
@@ -129,19 +130,21 @@ exports.updateHospital=async (req,res,next)=>{
 //@desc     Delete hospital
 //@route    DELETE /api/v1/hospitals/:id
 //@access   Private
-exports.deleteHospital=async (req,res,next)=>{
+exports.deleteHospital = async (req, res) => {
     try {
         const hospital = await Hospital.findById(req.params.id);
 
-        if (!hospital){
-            return res.status(400).json({success:false});
+        if (!hospital) {
+            return res.status(400).json({ success: false });
         }
-        hospital.remove();
-        res.status(200).json({success:true, data: {}});
+        
+        await hospital.deleteOne(); // Await the deletion operation
+
+        res.status(200).json({ success: true, data: {} });
     } catch (err) {
-        res.status(400).json({success:false});
+        console.error(err);
+        res.status(500).json({ success: false, error: 'Server Error' });
     }
-    // res.status(200).json({success:true, msg:`Delete hospital ${req.params.id}`});
 };
 
 exports.getVacCenters = (req,res,next) => {
